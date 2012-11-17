@@ -18,28 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 '''
-
-import os
-import curses
-from curses import ascii
+from knack.gimp.ascii.Gen import GenAscii
 from knack.gimp.ascii.utils import KnackError
 
-
-class GenAscii(object):
-    def __init__(self, mode='file'):
-        if mode == 'file' or mode == 'curse':
-            self.mode = mode
-        else:
-            raise KnackError(u"Le mode de rendu doit être file ou curse !!!")
-        if mode == 'curse':
-            self.start_curses()
-    def start_curses(self):
-        self.stdscr = curses.initscr()
-        curses.noecho()
-        curses.cbreak()
-        self.stdscr.keypad(1)
-    def stop_curses(self):
-        curses.nocbreak()
-        self.stdscr.keypad(0)
-        curses.echo()
-        curses.endwin()
+try:
+    generator = GenAscii('curse')
+except KnackError as e:
+    print e.__str__()
