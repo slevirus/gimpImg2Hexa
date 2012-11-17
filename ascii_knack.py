@@ -4,28 +4,36 @@
 
 from gimpfu import *
 import os
-from knack.gimp.ascii import ControlGimp
-from knack.gimp.ascii import utils
+from knack.gimp.ascii.utils import generate_log_console, generate_log_popup
+from knack.gimp.ascii.ControlGimp import ControlColor
+
 
 def run(*args):
     """main plugin"""
     input_dir, filename, use_char, width, height = args
-    utils.generate_log(input_dir)
-    utils.generate_log(filename)
-    utils.generate_log(use_char)
-    utils.generate_log(width)
-    utils.generate_log(height)
-    image = gimp.image_list()[0]
+    generate_log_console(input_dir)
+    generate_log_console(filename)
+    generate_log_console(use_char)
+    generate_log_console(width)
+    generate_log_console(height)
+    image_list = gimp.image_list()
+    if len(image_list) == 0:
+        message = u"Vous devez avoir un image ouverte par gimp pour lancer ce plugins"
+        generate_log_popup(message)
+        return False
+    image = image_list[0]
     layer = image.layers[0]
     list_char = split_use_char(use_char)
+    control_object = ControlColor()
 
 
 def split_use_char(use_char):
     #use_char = str()
     use_char = use_char.strip()
-    utils.generate_log(use_char)
+    generate_log_console(use_char)
     use_char = use_char.split(';')
-    utils.generate_log(use_char)
+    generate_log_console(use_char)
+    return use_char
     
     
 
