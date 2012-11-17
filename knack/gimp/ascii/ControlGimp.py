@@ -13,8 +13,6 @@ class Control(object):
         self.image = gimp.image_list()[0]
         self.layer = self.image.layers[0]
         return
-    def generate_log(self, message):
-        return
     def get_width(self):
         return self.image.width
     def get_height(self):
