@@ -59,3 +59,11 @@ class ControlColor(Control):
         '''return color on current image'''
         return gimp.pdb.gimp_image_pick_color(self.image, self.layer, x, y,
                                                           TRUE , TRUE, widht)
+    def check_and_convert(self, grey):
+        if grey == 0:
+            raise(u"La gestion des images en couleur n'est pas implenté, pardon :-(")
+        if self.layer.is_gray:
+            return True
+        else:
+            gimp.pdb.gimp_image_convert_grayscale(self.layer)
+            return True

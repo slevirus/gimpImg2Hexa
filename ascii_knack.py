@@ -27,7 +27,7 @@ from knack.gimp.ascii.ControlGimp import ControlColor
 
 def run(*args):
     """main plugin"""
-    input_dir, filename, use_char, width, height = args
+    input_dir, filename, use_char, width, height, grey = args
     generate_log_console(input_dir)
     generate_log_console(filename)
     generate_log_console(use_char)
@@ -38,6 +38,7 @@ def run(*args):
     try:
         control_object = ControlColor()
         control_object.generate_grid(width, height)
+        control_object.check_and_convert(grey)
     except KnackError as e:
         e.generate_log_popup()
         return False
@@ -63,6 +64,7 @@ register(
     (PF_STRING, "arg2", "caractere utilise", ""),
     (PF_INT, "arg3", "largeur en pixel", ""),
     (PF_INT, "arg4", "hauteur en pixel", ""),
+    (PF_TOGGLE, "arg5", "niveau de gris", 1),
     ],
     [],
     run,
