@@ -40,11 +40,10 @@ def run(*args):
         control_object.generate_grid(width, height)
         control_object.check_and_convert(grey)
         control_object.create_working_layer()
-        control_object.generate_ascii()
+        control_object.generate_ascii(os.path.join(input_dir, filename), [12,52,28,32,55,77,88,99,105,111,122])
     except KnackError as e:
         e.generate_log_popup()
         return False
-    control_object.generate_grid(width, height)
 
 
 def split_use_char(use_char):

@@ -24,22 +24,17 @@ from knack.gimp.ascii.utils import KnackError, generate_log_console
 
 
 class GenAscii(object):
-    def __init__(self, mode='term'):
+    def __init__(self, mode='file'):
         if mode == 'file' or mode == 'term':
             self.mode = mode
         else:
             raise KnackError(u"Le mode de rendu doit être file ou term !!!")
     def load_char(self, list_char=None, list_color=None):
         if list_char == None:
-            if list_color and len(list_color) != 0:
-                self.dict_char = {}
-                for color in list_color:
-                    self.dict_char[color] = chr(color)
-                print self.dict_char.__str__()
-            else:
-                raise KnackError(u"La génération de couleur est vide")
+            return True
         else:
             raise KnackError(u"La génération d'une séléction de charactère n'est pas implémenté")
+        
     def generate_ascii(self, list_color):
         if self.mode=='file':
             node = open('/tmp/test', 'w')

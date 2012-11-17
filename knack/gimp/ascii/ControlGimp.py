@@ -54,6 +54,8 @@ class ControlCoord(ControlGimp):
  impossible" % ( int(row), int(height)))
         self.columns_width = width / columns
         self.row_height = height / row
+        self.row = row
+        self.columns = columns
         return True
     def make_rectangle_selection(self):
         '''create new rectangle selection'''
@@ -110,8 +112,15 @@ class ControlColor(ControlLayer):
         else:
             gimp.pdb.gimp_image_convert_grayscale(self.image)
             return True
+    def make_list_color(self):
+        for y in range(0, self.get_height(), self.row_height):
+            for x in range(0, self.get_width(), self.columns_width):
+                generate_log_console('x: %i, y: %i' % (int(x), int(y)))
+                
 
 class Control(ControlColor):
     def __init__(self):
         self.generator_ascii = GenAscii()
         return super(Control, self).__init__()
+    def generate_ascii(self, filename, list_color):
+        self.generator_ascii.generate_ascii(self.make_list_color())
