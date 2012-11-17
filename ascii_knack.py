@@ -37,6 +37,7 @@ def run(*args):
     list_char = split_use_char(use_char)
     try:
         control_object = ControlColor()
+        control_object.generate_grid(width, height)
     except KnackError as e:
         e.generate_log_popup()
         return False

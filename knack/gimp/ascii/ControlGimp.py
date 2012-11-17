@@ -40,16 +40,19 @@ class Control(object):
         '''return height of current img'''
         return self.image.height
     def generate_grid(self, columns, row):
-        generate_log_console(str(columns))
-        generate_log_console(str(row))
         width = self.get_width()
         height = self.get_height()
-        generate_log_console(str(width))
-        generate_log_console(str(height))
-        columns_width = width / columns
-        row_height = height / row
-        generate_log_console(str(columns_width))
-        generate_log_console(str(row_height))
+        if width < columns:
+            raise KnackError(u"Votre nom de colones (%i) est superieur au\
+ nombre de pixel en largeur (%i) de votre image, opération\
+ impossible" % ( int(columns), int(width)))
+        if height < row:
+            raise KnackError(u"Votre nom de lignes (%i) est superieur au\
+ nombre de pixel (%i) en hauteur de votre image, opération\
+ impossible" % ( int(row), int(height)))
+        self.columns_width = width / columns
+        self.row_height = height / row
+        return True
 
 class ControlColor(Control):
     def pick_color(self, x, y, width):
