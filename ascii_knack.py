@@ -4,7 +4,7 @@
 
 from gimpfu import *
 import os
-from knack.gimp.ascii.utils import generate_log_console, generate_log_popup
+from knack.gimp.ascii.utils import KnackError, generate_log_console
 from knack.gimp.ascii.ControlGimp import ControlColor
 
 
@@ -16,15 +16,13 @@ def run(*args):
     generate_log_console(use_char)
     generate_log_console(width)
     generate_log_console(height)
-    image_list = gimp.image_list()
-    if len(image_list) == 0:
-        message = u"Vous devez avoir un image ouverte par gimp pour lancer ce plugins"
-        generate_log_popup(message)
-        return False
-    image = image_list[0]
-    layer = image.layers[0]
+    
     list_char = split_use_char(use_char)
-    control_object = ControlColor()
+    try:
+        control_object = ControlColor()
+    except KnackError as e:
+        e.generate_log_popup()
+        return False
 
 
 def split_use_char(use_char):
