@@ -23,7 +23,7 @@ import os
 from knack.gimp.ascii.utils import KnackError, generate_log_console
 
 
-class Control(object):
+class ControlGimp(object):
     '''Base class for control gimp'''
     def __init__(self):
         '''Verify if gimp have a loaded img'''
@@ -33,6 +33,8 @@ class Control(object):
             raise KnackError(message)
         self.image = image_list[0]
         self.layer = self.image.layers[0]
+
+class ControlCoord(ControlGimp):
     def get_width(self):
         '''return width of current img'''
         return self.image.width
@@ -53,17 +55,62 @@ class Control(object):
         self.columns_width = width / columns
         self.row_height = height / row
         return True
+    def make_rectangle_selection(self):
+        '''create new rectangle selection'''
+        gimp.pdb.gimp_image_set_active_layer(self.image, self.layer)
+        gimp.pdb.gimp_selection_none(self.image)
+        gimp.pdb.gimp_image_select_rectangle(self.image, CHANNEL_OP_REPLACE, \
+                                             x, y, AVERAGE_WIDTH_PIX, AVERAGE_WIDTH_PIX)
+        return True
+    def make_total_selection(self):
+        '''create selection scale to all image aera'''
+        gimp.pdb.gimp_image_set_active_layer(self.image, self.layer)
+        gimp.pdb.gimp_selection_none(self.image)
+        gimp.pdb.gimp_selection_all(self.image)
+        return True
+    
+class ControlLayer(ControlCoord):
+    def create_working_layer(self):
+        self.make_total_selection()
+        self.copy_paste()
+        return
+    def copy_paste(self):
+        '''make copy of the selection and paste it in a new layer'''
+        gimp.pdb.gimp_edit_copy(self.layer)
+        floating_sel = gimp.pdb.gimp_edit_paste(self.layer, TRUE)
+        gimp.pdb.gimp_floating_sel_to_layer(floating_sel)
+        self.layer = self.image.layers[0]
+        pdb.gimp_image_set_active_layer(self.image, self.layer)
+        return True
+    def delete_layer(self):
+        pdb.gimp_image_remove_layer(self.image, self.layer)
+        self.layer = self.image.layers[0]
+        return True
 
-class ControlColor(Control):
+class ControlColor(ControlLayer):
     def pick_color(self, x, y, width):
-        '''return color on current image'''
-        return gimp.pdb.gimp_image_pick_color(self.image, self.layer, x, y,
-                                                          TRUE , TRUE, widht)
+        '''return color picked on current image'''
+        self.color_picked = gimp.pdb.gimp_image_pick_color(self.image, self.layer, x, y,
+                                                          TRUE , TRUE, width)
+    def pick_gray(self, x, y, width):
+        '''return color picked on current image'''
+        self.pick_color(x, y, width)
+        if self.color_picked[0] == self.color_picked[1] \
+                    and self.color_picked[0] == self.color_picked[2]:
+            self.gray = self.color_picked[0]
+        else:
+            raise KnackError(u"L'image n'est pas conveti en niveau de gris ?")
+        return True
     def check_and_convert(self, grey):
+        '''Convert layer color if needed'''
         if grey == 0:
             raise(u"La gestion des images en couleur n'est pas implenté, pardon :-(")
         if self.layer.is_gray:
             return True
         else:
-            gimp.pdb.gimp_image_convert_grayscale(self.layer)
+            gimp.pdb.gimp_image_convert_grayscale(self.image)
             return True
+
+class Control(ControlColor):
+    def __init__(self):
+        return super(Control, self).__init__()

@@ -22,7 +22,7 @@
 from gimpfu import *
 import os
 from knack.gimp.ascii.utils import KnackError, generate_log_console
-from knack.gimp.ascii.ControlGimp import ControlColor
+from knack.gimp.ascii.ControlGimp import Control
 
 
 def run(*args):
@@ -36,9 +36,11 @@ def run(*args):
     
     list_char = split_use_char(use_char)
     try:
-        control_object = ControlColor()
+        control_object = Control()
         control_object.generate_grid(width, height)
         control_object.check_and_convert(grey)
+        control_object.create_working_layer()
+        control_object.pick_gray(5,5,2)
     except KnackError as e:
         e.generate_log_popup()
         return False
