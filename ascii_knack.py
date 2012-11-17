@@ -40,7 +40,7 @@ def run(*args):
         control_object.generate_grid(width, height)
         control_object.check_and_convert(grey)
         control_object.create_working_layer()
-        control_object.pick_gray(5,5,2)
+        control_object.generate_ascii()
     except KnackError as e:
         e.generate_log_popup()
         return False

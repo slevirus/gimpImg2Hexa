@@ -21,7 +21,7 @@
 from gimpfu import *
 import os
 from knack.gimp.ascii.utils import KnackError, generate_log_console
-
+from knack.gimp.ascii.Gen import GenAscii
 
 class ControlGimp(object):
     '''Base class for control gimp'''
@@ -113,4 +113,5 @@ class ControlColor(ControlLayer):
 
 class Control(ControlColor):
     def __init__(self):
+        self.generator_ascii = GenAscii()
         return super(Control, self).__init__()
