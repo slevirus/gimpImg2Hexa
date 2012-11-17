@@ -4,6 +4,7 @@
 
 from gimpfu import *
 import os
+from knack.gimp.ascii import ControlGimp
 
 def run(*args):
     """main plugin"""
