@@ -22,6 +22,9 @@ from knack.gimp.ascii.Gen import GenAscii
 from knack.gimp.ascii.utils import KnackError
 
 try:
-    generator = GenAscii('curse')
+    generator = GenAscii('file')
+    generator.load_char(None, [96,25,76,200])
+    generator.generate_ascii([96,25,76,200,96,25,76,200])
+    
 except KnackError as e:
     print e.__str__()

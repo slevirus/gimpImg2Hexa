@@ -20,26 +20,34 @@
 '''
 
 import os
-import curses
-from curses import ascii
-from knack.gimp.ascii.utils import KnackError
+from knack.gimp.ascii.utils import KnackError, generate_log_console
 
 
 class GenAscii(object):
-    def __init__(self, mode='file'):
-        if mode == 'file' or mode == 'curse':
+    def __init__(self, mode='term'):
+        if mode == 'file' or mode == 'term':
             self.mode = mode
         else:
-            raise KnackError(u"Le mode de rendu doit être file ou curse !!!")
-        if mode == 'curse':
-            self.start_curses()
-    def start_curses(self):
-        self.stdscr = curses.initscr()
-        curses.noecho()
-        curses.cbreak()
-        self.stdscr.keypad(1)
-    def stop_curses(self):
-        curses.nocbreak()
-        self.stdscr.keypad(0)
-        curses.echo()
-        curses.endwin()
+            raise KnackError(u"Le mode de rendu doit être file ou term !!!")
+    def load_char(self, list_char=None, list_color=None):
+        if list_char == None:
+            if list_color and len(list_color) != 0:
+                self.dict_char = {}
+                for color in list_color:
+                    self.dict_char[color] = chr(color)
+                print self.dict_char.__str__()
+            else:
+                raise KnackError(u"La génération de couleur est vide")
+        else:
+            raise KnackError(u"La génération d'une séléction de charactère n'est pas implémenté")
+    def generate_ascii(self, list_color):
+        if self.mode=='file':
+            node = open('/tmp/test', 'w')
+            for color in list_color:
+                node.write(chr(color))
+            node.close()
+            return True
+        else:
+            raise KnackError(u"la génération d'ascii ne peut actuellement se faire que dans un fichier")
+        
+
