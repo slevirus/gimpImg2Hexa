@@ -78,7 +78,6 @@ class ControlCoord(ControlGimp):
 class ControlLayer(ControlCoord):
     def create_working_layer(self):
         self.make_total_selection()
-        self.copy_paste()
         return
     def copy_paste(self):
         '''make copy of the selection and paste it in a new layer'''
