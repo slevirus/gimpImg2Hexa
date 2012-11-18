@@ -45,7 +45,7 @@ class ControlCoord(ControlGimp):
         width = self.get_width()
         height = self.get_height()
         if width < columns:
-            raise KnackError(u"Votre nom de colones (%i) est superieur au\
+            raise KnackError(u"Votre nom de colonnes (%i) est superieur au\
  nombre de pixel en largeur (%i) de votre image, opération\
  impossible" % ( int(columns), int(width)))
         if height < row:
@@ -56,6 +56,10 @@ class ControlCoord(ControlGimp):
         self.row_height = height / row
         self.row = row
         self.columns = columns
+        if self.columns_width < self.row_height:
+            self.radius = self.columns_width
+        else:
+            self.radius = self.row_height
         return True
     def make_rectangle_selection(self):
         '''create new rectangle selection'''
@@ -113,10 +117,12 @@ class ControlColor(ControlLayer):
             gimp.pdb.gimp_image_convert_grayscale(self.image)
             return True
     def make_list_color(self):
+        self.list_color = []
         for y in range(0, self.get_height(), self.row_height):
             for x in range(0, self.get_width(), self.columns_width):
                 generate_log_console('x: %i, y: %i' % (int(x), int(y)))
-                
+                self.pick_gray(x, y, self.radius)
+                self.list_color.append(self.gray)
 
 class Control(ControlColor):
     def __init__(self):
