@@ -33,6 +33,7 @@ def run(*args):
     generate_log_console(use_char)
     generate_log_console(width)
     generate_log_console(height)
+    generate_log_console(grey)
     
     list_char = split_use_char(use_char)
     try:

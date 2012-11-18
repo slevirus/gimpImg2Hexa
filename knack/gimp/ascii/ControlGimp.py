@@ -124,7 +124,7 @@ class ControlColor(ControlLayer):
                 self.pick_gray(x, y, self.radius)
                 self.list_color.append(self.gray)
             #add '\n' for line break
-            self.list_color.append(13)
+            self.list_color.append(10)
 
 class Control(ControlColor):
     def __init__(self):
