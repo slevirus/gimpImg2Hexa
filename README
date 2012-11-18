@@ -5,11 +5,38 @@ ASCII ART GENERATOR
 ************
 Installation
 ************
+------------
+requirements
+------------
+You need gimp 2.8 and python 2.7 on your os
 
-*************
-Gimp use case
-*************
+Copy the entire directory in your personnal gimp plugin directory. You can
+configure the plugins path in menu Edit -> Preferences -> Folders -> Plug-ins
 
-*************
-ncurse use case
-*************
+**********************
+Gimp use with filename
+**********************
+Gimp ascii art generator is a basic plugins with some option for generate ascii
+art on grayscale image. 
+In simple mode, code color of gray is the same range than ascii code.
+complex mode is not implemented, sorry
+
+********
+Licenses
+********
+    Simon ANDRÉ ©copyright
+    Knack Computer ©copyright
+    This file is part of ascii_gimp.
+
+    Foobar is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Foobar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
