@@ -14,8 +14,8 @@ Copy the entire directory in your personnal gimp plugin directory. You can
 configure the plugins path in menu Edit -> Preferences -> Folders -> Plug-ins
 
 Remarque: sur linux rendre le fichier python executable 
-::
-    chmod 666 ./ascii_knack.py
+
+chmod ug+x ./ascii_knack.py
 
 **********************
 Gimp use with filename
