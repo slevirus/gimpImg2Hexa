@@ -21,6 +21,7 @@
 
 import os
 from knack.gimp.ascii.utils import KnackError, generate_log_console
+from revelation import FileError
 
 
 class GenAscii(object):
@@ -35,12 +36,18 @@ class GenAscii(object):
         else:
             raise KnackError(u"La génération d'une séléction de charactère n'est pas implémenté")
         
-    def generate_ascii(self, list_color):
+    def generate_ascii(self, list_color, filename):
         if self.mode=='file':
-            node = open('/tmp/test', 'w')
-            for color in list_color:
-                node.write(chr(color))
-            node.close()
+            try:
+                node = open(filename, 'w')
+            except IOError as e:
+                raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
+            else:
+                for color in list_color:
+                    node.write(chr(color))
+            finally:
+                node.close()
+            
             return True
         else:
             raise KnackError(u"la génération d'ascii ne peut actuellement se faire que dans un fichier")

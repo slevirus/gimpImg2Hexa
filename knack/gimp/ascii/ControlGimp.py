@@ -117,16 +117,21 @@ class ControlColor(ControlLayer):
             gimp.pdb.gimp_image_convert_grayscale(self.image)
             return True
     def make_list_color(self):
+        '''make list with color'''
         self.list_color = []
         for y in range(0, self.get_height(), self.row_height):
             for x in range(0, self.get_width(), self.columns_width):
-                generate_log_console('x: %i, y: %i' % (int(x), int(y)))
                 self.pick_gray(x, y, self.radius)
                 self.list_color.append(self.gray)
+            #add '\n' for line break
+            self.list_color.append(13)
 
 class Control(ControlColor):
     def __init__(self):
+        '''instanciate ascii generator'''
         self.generator_ascii = GenAscii()
         return super(Control, self).__init__()
-    def generate_ascii(self, filename, list_color):
-        self.generator_ascii.generate_ascii(self.make_list_color())
+    def generate_ascii(self, filename):
+        '''lauch file generator process with ascii generator'''
+        self.make_list_color()
+        self.generator_ascii.generate_ascii(self.list_color, filename)
