@@ -122,7 +122,7 @@ class ControlColor(ControlLayer):
             for x in range(0, self.get_width(), self.columns_width):
                 self.pick_gray(x, y, self.radius)
                 self.list_color.append(self.gray)
-            #add '\n' for line break
+            #add unix code for line break
             self.list_color.append(10)
 
 class Control(ControlColor):

@@ -28,13 +28,6 @@ from knack.gimp.ascii.ControlGimp import Control
 def run(*args):
     """main plugin"""
     input_dir, filename, use_char, width, height, grey = args
-    generate_log_console(input_dir)
-    generate_log_console(filename)
-    generate_log_console(use_char)
-    generate_log_console(width)
-    generate_log_console(height)
-    generate_log_console(grey)
-    
     list_char = split_use_char(use_char)
     try:
         control_object = Control()
@@ -51,9 +44,7 @@ def split_use_char(use_char):
     '''just split string argumment in a list of ascii char
     TODO: verify if str is ascii !'''
     use_char = use_char.strip()
-    generate_log_console(use_char)
     use_char = use_char.split(';')
-    generate_log_console(use_char)
     return use_char
 
 
