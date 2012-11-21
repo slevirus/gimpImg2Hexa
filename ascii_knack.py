@@ -27,8 +27,7 @@ from knack.gimp.ascii.ControlGimp import Control
 
 def run(*args):
     """main plugin"""
-    input_dir, filename, use_char, width, height, grey = args
-    list_char = split_use_char(use_char)
+    input_dir, filename, width, height, grey = args
     try:
         control_object = Control()
         control_object.generate_grid(width, height)
@@ -52,11 +51,10 @@ register(
     "ascii_knack", "", "", "", "", "",
     "<Toolbox>/Xtns/Languages/Python-Fu/knack/ascii knack", "",
     [
-    (PF_DIRNAME, "arg0", "Repertoire avec les images sources", ""),
-    (PF_STRING, "arg1", "Nom du fichier", ""),
-    (PF_STRING, "arg2", "caractere utilise", ""),
-    (PF_INT, "arg3", "largeur en pixel", ""),
-    (PF_INT, "arg4", "hauteur en pixel", ""),
+    (PF_DIRNAME, "arg0", u"Repertoire avec les images sources", ""),
+    (PF_STRING, "arg1", "Nom du fichier", u"filename.txt"),
+    (PF_INT, "arg3", "nombre de colonne", u"30"),
+    (PF_INT, "arg4", "nombre de ligne", u"10"),
     (PF_TOGGLE, "arg5", "niveau de gris", 1),
     ],
     [],
