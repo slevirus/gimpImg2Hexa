@@ -48,7 +48,7 @@ def split_use_char(use_char):
 
 
 register(
-    "ascii_knack", "", "", "", "", "",
+    "knack_ascii_gimp", "", "", "", "", "",
     "<Toolbox>/Xtns/Languages/Python-Fu/knack/ascii knack", "",
     [
     (PF_DIRNAME, "arg0", u"Repertoire avec les images sources", ""),
