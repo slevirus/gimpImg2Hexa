@@ -36,7 +36,7 @@ class GenAscii(object):
         else:
             raise KnackError(u"La génération d'une séléction de charactère n'est pas implémenté")
         
-    def generate_ascii(self, list_color, filename):
+    def generate_ascii(self, list_color, select_color, filename):
         if self.mode=='file':
             try:
                 node = open(filename, 'w')

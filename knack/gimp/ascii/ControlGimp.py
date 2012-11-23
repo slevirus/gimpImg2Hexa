@@ -124,6 +124,7 @@ class ControlColor(ControlLayer):
                 self.list_color.append(self.gray)
             #add unix code for line break
             self.list_color.append(10)
+        self.select_color = set(self.list_color)
 
 class Control(ControlColor):
     def __init__(self):
@@ -133,4 +134,4 @@ class Control(ControlColor):
     def generate_ascii(self, filename):
         '''lauch file generator process with ascii generator'''
         self.make_list_color()
-        self.generator_ascii.generate_ascii(self.list_color, filename)
+        self.generator_ascii.generate_ascii(self.list_color, self.select_color, filename)
