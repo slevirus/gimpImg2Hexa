@@ -30,11 +30,11 @@ class GenAscii(object):
             self.mode = mode
         else:
             raise KnackError(u"Le mode de rendu doit être file ou term !!!")
-    def load_char(self, list_char=None, list_color=None):
-        if list_char == None:
-            return True
-        else:
-            raise KnackError(u"La génération d'une séléction de charactère n'est pas implémenté")
+    def mapp_char(self, select_color=[]):
+        mapp_dict = {}
+        for color in select_color:
+            mapp_dict[color] = chr(color)
+        return mapp_dict
         
     def generate_ascii(self, list_color, select_color, filename):
         if self.mode=='file':
@@ -43,8 +43,9 @@ class GenAscii(object):
             except IOError as e:
                 raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
             else:
+                mapp_dict = self.mapp_char(select_color)
                 for color in list_color:
-                    node.write(chr(color))
+                    node.write(mapp_dict[color])
             finally:
                 node.close()
             
