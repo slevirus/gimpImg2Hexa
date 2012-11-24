@@ -22,6 +22,7 @@
 import os
 from knack.gimp.ascii.utils import KnackError, generate_log_console
 from revelation import FileError
+from random import uniform
 
 
 class GenAscii(object):
@@ -33,7 +34,10 @@ class GenAscii(object):
     def mapp_char(self, select_color=[]):
         mapp_dict = {}
         for color in select_color:
-            mapp_dict[color] = chr(color)
+            if color == 10 or color > 32 and color < 126:
+                mapp_dict[color] = chr(color)
+            else:
+                mapp_dict[color] = chr(int(round(uniform(32,126), 0)))
         return mapp_dict
         
     def generate_ascii(self, list_color, select_color, filename):
@@ -48,7 +52,6 @@ class GenAscii(object):
                     node.write(mapp_dict[color])
             finally:
                 node.close()
-            
             return True
         else:
             raise KnackError(u"la génération d'ascii ne peut actuellement se faire que dans un fichier")
