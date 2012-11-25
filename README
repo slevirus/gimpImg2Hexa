@@ -1,33 +1,43 @@
-===================
-ASCII ART GENERATOR
-===================
+===========================================
+SET OF GIMP PLUGINS FOR KNACK COMPUTER CLUB
+===========================================
 
-************
+****************
+KNACK GIMP ASCII
+****************
+
+------------
 Installation
-************
+------------
 ------------
 requirements
 ------------
+
 You need gimp 2.8 and python 2.7 on your os
 
 Copy the entire directory in your personnal gimp plugin directory. You can
 configure the plugins path in menu Edit -> Preferences -> Folders -> Plug-ins
 
 Remarque: sur linux rendre le fichier python executable 
-::
+	::
+
     chmod ug+x ./ascii_knack.py
 
-**********************
+----------------------
 Gimp use with filename
-**********************
+----------------------
+
 Gimp ascii art generator is a basic plugins with some option for generate ascii
 art on grayscale image. 
-In simple mode, code color of gray is the same range than ascii code.
-complex mode is not implemented, sorry
 
-********
+In simple mode, code color of gray is the same range than ascii code.
+
+Ascii set use range 32-126. If color is not in range, use random attribution.
+
+--------
 Licenses
-********
+--------
+
     Simon ANDRÉ ©copyright
     Knack Computer ©copyright
     This file is part of knack_gimp_ascii.
@@ -46,36 +56,13 @@ Licenses
     along with knack_gimp_ascii.  If not, see <http://www.gnu.org/licenses/>.
 
 
-*****
+-----
 enjoy
-*****
+-----
 
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhku}}}}}}}}}}}}}}}}}}}}}}}}}tjhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhkv~~~xsrrrrrrrrrrrrrw}~~~~|rihhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhkv~~zphhhhhhhhhhhhir{~~~~zpihhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhkv~~wlhhhhhhhhhhhku}~~~~wmhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhjpttoihhhhhhhhhhmx~~~~}tjhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhipz~~~~{qihhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhjs|~~~~xnhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhlv}~~~}ukhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhoy~~~~{rihhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhir{~~~~yohhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhku}~~~}vlhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhnx~~~~|sjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhiq{~~~~zpihhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhjt|~~~~wmhhhhhhhhhhhknomjhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhlw~~~~}tkhhhhhhhhhhhit~~xnhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhoy~~~~{qihhhhhhhhhhhhlw~~xnhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhjr|~~~~xnhhhhhhhhhhhhhhoz~~xnhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhku}~~~~|vssssssssssssssty~~~xnhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhmv||||||||||||||||||||||||||wmhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+******************
+KNACK GIMP ARDUINO
+******************
+
+TODO !
 
