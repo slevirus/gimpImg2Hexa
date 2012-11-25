@@ -129,7 +129,7 @@ class ControlColor(ControlLayer):
 class Control(ControlColor):
     def __init__(self):
         '''instanciate ascii generator'''
-        self.generator_ascii = GenAscii()
+        self.generator_ascii = genAscii()
         return super(Control, self).__init__()
     def generate_ascii(self, filename):
         '''lauch file generator process with ascii generator'''

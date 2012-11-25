@@ -39,13 +39,6 @@ def run(*args):
         return False
 
 
-def split_use_char(use_char):
-    '''just split string argumment in a list of ascii char
-    TODO: verify if str is ascii !'''
-    use_char = use_char.strip()
-    use_char = use_char.split(';')
-    return use_char
-
 
 register(
     "knack_gimp_ascii", "", "", "", "", "",
