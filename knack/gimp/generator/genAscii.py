@@ -20,12 +20,12 @@
 '''
 
 import os
-from knack.gimp.ascii.utils import KnackError, generate_log_console
+from knack.gimp.utils import KnackError, generate_log_console
 from revelation import FileError
 from random import uniform
 
 
-class GenAscii(object):
+class genAscii(object):
     def __init__(self, mode='file'):
         if mode == 'file' or mode == 'term':
             self.mode = mode

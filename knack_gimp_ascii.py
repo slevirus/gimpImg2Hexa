@@ -21,8 +21,8 @@
 
 from gimpfu import *
 import os
-from knack.gimp.ascii.utils import KnackError, generate_log_console
-from knack.gimp.ascii.ControlGimp import Control
+from knack.gimp.utils import KnackError, generate_log_console
+from knack.gimp.control.controlGimp import Control
 
 
 def run(*args):

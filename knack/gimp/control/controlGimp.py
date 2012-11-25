@@ -20,8 +20,8 @@
 '''
 from gimpfu import *
 import os
-from knack.gimp.ascii.utils import KnackError, generate_log_console
-from knack.gimp.ascii.Gen import GenAscii
+from knack.gimp.utils import KnackError, generate_log_console
+from knack.gimp.generator.genAscii import genAscii
 
 class ControlGimp(object):
     '''Base class for control gimp'''
