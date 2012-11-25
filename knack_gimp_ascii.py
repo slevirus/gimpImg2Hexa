@@ -22,14 +22,16 @@
 from gimpfu import *
 import os
 from knack.gimp.utils import KnackError, generate_log_console
-from knack.gimp.control.controlGimp import Control
+from knack.gimp.control.controlGimp import control
+from knack.gimp.generator.genAscii import genAscii
+from knack.gimp.generator.genArduino import genArduino
 
 
 def run(*args):
     """main plugin"""
     input_dir, filename, width, height, grey = args
     try:
-        control_object = Control()
+        control_object = control(genAscii())
         control_object.generate_grid(width, height)
         control_object.check_and_convert(grey)
         control_object.create_working_layer()

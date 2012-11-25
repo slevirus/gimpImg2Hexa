@@ -31,6 +31,7 @@ class genAscii(object):
             self.mode = mode
         else:
             raise KnackError(u"Le mode de rendu doit être file ou term !!!")
+        
     def mapp_char(self, select_color=[]):
         mapp_dict = {}
         for color in select_color:
@@ -40,7 +41,7 @@ class genAscii(object):
                 mapp_dict[color] = chr(int(round(uniform(32,126), 0)))
         return mapp_dict
         
-    def generate_ascii(self, list_color, select_color, filename):
+    def generate(self, list_color, select_color, filename):
         if self.mode=='file':
             try:
                 node = open(filename, 'w')

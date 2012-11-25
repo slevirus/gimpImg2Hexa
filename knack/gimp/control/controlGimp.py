@@ -21,9 +21,8 @@
 from gimpfu import *
 import os
 from knack.gimp.utils import KnackError, generate_log_console
-from knack.gimp.generator.genAscii import genAscii
 
-class ControlGimp(object):
+class controlGimp(object):
     '''Base class for control gimp'''
     def __init__(self):
         '''Verify if gimp have a loaded img'''
@@ -34,7 +33,7 @@ class ControlGimp(object):
         self.image = image_list[0]
         self.layer = self.image.layers[0]
 
-class ControlCoord(ControlGimp):
+class controlCoord(controlGimp):
     def get_width(self):
         '''return width of current img'''
         return self.image.width
@@ -75,7 +74,7 @@ class ControlCoord(ControlGimp):
         gimp.pdb.gimp_selection_all(self.image)
         return True
     
-class ControlLayer(ControlCoord):
+class controlLayer(controlCoord):
     def create_working_layer(self):
         self.make_total_selection()
         return
@@ -92,7 +91,7 @@ class ControlLayer(ControlCoord):
         self.layer = self.image.layers[0]
         return True
 
-class ControlColor(ControlLayer):
+class controlColor(controlLayer):
     def pick_color(self, x, y, width):
         '''return color picked on current image'''
         self.color_picked = gimp.pdb.gimp_image_pick_color(self.image, self.layer, x, y,
@@ -126,12 +125,12 @@ class ControlColor(ControlLayer):
             self.list_color.append(10)
         self.select_color = set(self.list_color)
 
-class Control(ControlColor):
-    def __init__(self):
-        '''instanciate ascii generator'''
-        self.generator_ascii = genAscii()
-        return super(Control, self).__init__()
+class control(controlColor):
+    def __init__(self, generator):
+        '''select generator'''
+        self.generator = generator
+        return super(control, self).__init__()
     def generate_ascii(self, filename):
         '''lauch file generator process with ascii generator'''
         self.make_list_color()
-        self.generator_ascii.generate_ascii(self.list_color, self.select_color, filename)
+        self.generator.generate(self.list_color, self.select_color, filename)

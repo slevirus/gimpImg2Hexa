@@ -19,32 +19,14 @@
     along with knack_gimp_arduino.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from gimpfu import *
 import os
 from knack.gimp.utils import KnackError, generate_log_console
-from knack.gimp.control.controlGimp import control
-from knack.gimp.generator.genArduino import genArduino
+from revelation import FileError
+from random import uniform
 
 
-def run(*args):
-    """main plugin"""
-    input_dir, filename = args
-    try:
-        control_object = control(genArduino())
-    except KnackError as e:
-        e.generate_log_popup()
-        return False
+class genArduino(object):
+    def __init__(self):
+        None
+            
 
-
-register(
-    "knack_gimp_arduino", "", "", "", "", "",
-    "<Toolbox>/Xtns/Languages/Python-Fu/knack/arduino", "",
-    [
-    (PF_DIRNAME, "arg0", u"Repertoire avec les images sources", ""),
-    (PF_STRING, "arg1", "Nom du fichier", u"filename.txt"),
-    ],
-    [],
-    run,
-    )
-
-main()
