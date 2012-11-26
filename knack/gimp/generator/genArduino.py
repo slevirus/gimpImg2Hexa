@@ -24,9 +24,21 @@ from knack.gimp.utils import KnackError, generate_log_console
 from revelation import FileError
 from random import uniform
 
+def toCArray(width, height, pixelList):
+    '''generate c array to paste in c/c++ code'''
+    code = '{%i,%i,%s}' % (width, height, generate_hexacode(pixelList))
+    return code
+
+def generate_hexacode(pixelList):
+    hexacode = str()
+    for pixel in pixelList:
+        hexacode += pixel
+    return hexacode
 
 class genArduino(object):
     def __init__(self):
         None
-            
+    def generate(self, width, height, pixelList):
+        code = toCArray(width, height, pixelList)
+        generate_log_console(code)
 

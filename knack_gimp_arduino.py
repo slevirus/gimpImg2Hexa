@@ -24,7 +24,6 @@ import os
 from knack.gimp.utils import KnackError, generate_log_console
 from knack.gimp.control.controlGimp import control
 from knack.gimp.generator.genArduino import genArduino
-from knack.gimp.convertor.toCArray import toCArray
 
 
 
