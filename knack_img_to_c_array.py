@@ -18,7 +18,3 @@
     You should have received a copy of the GNU General Public License
     along with knack_img_to_c_array.  If not, see <http://www.gnu.org/licenses/>.
 '''
-
-from knack.gimp.convertor.toCArray import toCArray
-
-print toCArray(96, 32)

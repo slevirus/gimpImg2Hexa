@@ -103,7 +103,7 @@ class controlColor(controlLayer):
                     and self.color_picked[0] == self.color_picked[2]:
             self.gray = self.color_picked[0]
         else:
-            raise KnackError(u"L'image n'est pas conveti en niveau de gris ?")
+            raise KnackError(u"L'image n'est pas converti en niveau de gris ?")
         return True
     def check_and_convert(self, grey):
         '''Convert layer color if needed'''
@@ -114,6 +114,10 @@ class controlColor(controlLayer):
         else:
             gimp.pdb.gimp_image_convert_grayscale(self.image)
             return True
+    def check_and_convert_1bit(self):
+        '''Convert layer color if needed'''
+        #gimp.pdb.gimp_image_convert_indexed(self.image, 0, 3, 0, 0, 0, 0)
+        return True
     def make_list_color(self):
         '''make list with color'''
         self.list_color = []
@@ -124,6 +128,11 @@ class controlColor(controlLayer):
             #add unix code for line break
             self.list_color.append(10)
         self.select_color = set(self.list_color)
+    def makePixelList(self):
+        self.pixelList = []
+        for x in range(0,self.get_width()):
+            for y in range(0,self.get_height()):
+                self.pixelList.append(self.pick_gray(x, y, 0.5))
 
 class control(controlColor):
     def __init__(self, generator):
@@ -134,3 +143,6 @@ class control(controlColor):
         '''lauch file generator process with ascii generator'''
         self.make_list_color()
         self.generator.generate(self.list_color, self.select_color, filename)
+    def generate_bitmap(self, filename):
+        self.makePixelList()
+        self.generator.generate(self.get_width(), self.get_height(), self.pixelList)

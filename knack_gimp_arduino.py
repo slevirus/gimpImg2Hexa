@@ -24,13 +24,21 @@ import os
 from knack.gimp.utils import KnackError, generate_log_console
 from knack.gimp.control.controlGimp import control
 from knack.gimp.generator.genArduino import genArduino
+from knack.gimp.convertor.toCArray import toCArray
+
+
 
 
 def run(*args):
     """main plugin"""
     input_dir, filename = args
+    filePath = os.path.join(input_dir, filename)
     try:
         control_object = control(genArduino())
+        #width, height = control_object.getWidthHeight()
+        control_object.make_total_selection()
+        control_object.check_and_convert_1bit()
+        control_object.generate_bitmap(filePath)
     except KnackError as e:
         e.generate_log_popup()
         return False
