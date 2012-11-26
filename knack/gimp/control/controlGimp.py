@@ -147,4 +147,4 @@ class control(controlColor):
         self.generator.generate(self.list_color, self.select_color, filename)
     def generate_bitmap(self, filename):
         self.makePixelList()
-        self.generator.generate(self.get_width(), self.get_height(), self.pixelList)
+        self.generator.generate(self.get_width(), self.get_height(), self.pixelList, filename)

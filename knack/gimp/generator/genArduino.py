@@ -40,7 +40,14 @@ def generate_hexacode(pixelList):
 class genArduino(object):
     def __init__(self):
         None
-    def generate(self, width, height, pixelList):
-        code = toCArray(width, height, pixelList)
-        generate_log_console(code)
+    def generate(self, width, height, pixelList, filename):
+        try:
+            node = open(filename, 'w')
+        except IOError as e:
+            raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
+        else:
+            node.write(toCArray(width, height, pixelList))
+        finally:
+            node.close()
+        return True
 
