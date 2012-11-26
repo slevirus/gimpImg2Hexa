@@ -26,12 +26,17 @@ from random import uniform
 
 def toCArray(width, height, pixelList):
     '''generate c array to paste in c/c++ code'''
-    code = '{%i,%i,%s}' % (width, height, generate_hexacode(pixelList))
+    code = '{%i,%i,%s};' % (width, height, generate_hexacode(pixelList))
     return code
 
 def generate_hexacode(pixelList):
     hexacode = str()
+    ind = 0
     for pixel in pixelList:
+        ind += 1
+        if ind == 10:
+            hexacode += '\n'
+            ind = 0
         hexacode += pixel
         hexacode += ','
     return hexacode[:-1]

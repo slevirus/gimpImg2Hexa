@@ -130,8 +130,8 @@ class controlColor(controlLayer):
         self.select_color = set(self.list_color)
     def makePixelList(self):
         self.pixelList = []
-        for x in range(0,self.get_width()):
-            for y in range(0,self.get_height()):
+        for y in range(0,self.get_height()):
+            for x in range(0,self.get_width()):
                 self.pick_gray(x, y, 0.5)
                 hexa = "0x%02x" % (self.gray)
                 self.pixelList.append(hexa)
