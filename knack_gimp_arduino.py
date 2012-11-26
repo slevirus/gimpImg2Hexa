@@ -34,7 +34,6 @@ def run(*args):
     filePath = os.path.join(input_dir, filename)
     try:
         control_object = control(genArduino())
-        #width, height = control_object.getWidthHeight()
         control_object.make_total_selection()
         control_object.check_and_convert_1bit()
         control_object.generate_bitmap(filePath)
