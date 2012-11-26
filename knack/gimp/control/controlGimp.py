@@ -132,7 +132,9 @@ class controlColor(controlLayer):
         self.pixelList = []
         for x in range(0,self.get_width()):
             for y in range(0,self.get_height()):
-                self.pixelList.append(self.pick_gray(x, y, 0.5))
+                self.pick_gray(x, y, 0.5)
+                hexa = "0x%02x" % (self.gray)
+                self.pixelList.append(hexa)
 
 class control(controlColor):
     def __init__(self, generator):

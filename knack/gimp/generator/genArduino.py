@@ -26,6 +26,7 @@ from random import uniform
 
 def toCArray(width, height, pixelList):
     '''generate c array to paste in c/c++ code'''
+    generate_log_console(pixelList.__repr__())
     code = '{%i,%i,%s}' % (width, height, generate_hexacode(pixelList))
     return code
 
@@ -33,7 +34,8 @@ def generate_hexacode(pixelList):
     hexacode = str()
     for pixel in pixelList:
         hexacode += pixel
-    return hexacode
+        hexacode += ','
+    return hexacode[:-1]
 
 class genArduino(object):
     def __init__(self):
