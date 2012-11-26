@@ -145,6 +145,6 @@ class control(controlColor):
         '''lauch file generator process with ascii generator'''
         self.make_list_color()
         self.generator.generate(self.list_color, self.select_color, filename)
-    def generate_bitmap(self, filename):
+    def generate_bitmap(self, filename, directory):
         self.makePixelList()
-        self.generator.generate(self.get_width(), self.get_height(), self.pixelList, filename)
+        self.generator.generate(self.get_width(), self.get_height(), self.pixelList, filename, directory)

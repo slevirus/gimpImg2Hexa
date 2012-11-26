@@ -26,7 +26,6 @@ from random import uniform
 
 def toCArray(width, height, pixelList):
     '''generate c array to paste in c/c++ code'''
-    generate_log_console(pixelList.__repr__())
     code = '{%i,%i,%s}' % (width, height, generate_hexacode(pixelList))
     return code
 
@@ -40,9 +39,13 @@ def generate_hexacode(pixelList):
 class genArduino(object):
     def __init__(self):
         None
-    def generate(self, width, height, pixelList, filename):
+    def generate(self, width, height, pixelList, directory, projectname):
         try:
-            node = open(filename, 'w')
+            path_src = self.generateInoProject(directory, projectname)
+        except KnackError as e:
+            e.generate_log_popup()
+        try:
+            node = open(os.path.join(path_src, 'bitmaps.cpp'), 'w')
         except IOError as e:
             raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
         else:
@@ -50,4 +53,11 @@ class genArduino(object):
         finally:
             node.close()
         return True
-
+    def generateInoProject(self, directory, projectname):
+        os.chdir(directory)
+        os.mkdir(projectname, 0770)
+        os.chdir(os.path.join(directory, projectname))
+        os.mkdir('src', 0770)
+        os.chdir(os.path.join(directory, projectname, 'src'))
+        return os.path.join(directory, projectname, 'src')
+        

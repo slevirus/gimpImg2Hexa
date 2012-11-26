@@ -36,7 +36,7 @@ def run(*args):
         control_object = control(genArduino())
         control_object.make_total_selection()
         control_object.check_and_convert_1bit()
-        control_object.generate_bitmap(filePath)
+        control_object.generate_bitmap(input_dir, filename)
     except KnackError as e:
         e.generate_log_popup()
         return False
