@@ -46,7 +46,7 @@ register(
     "knack_gimp_ascii", "", "", "", "", "",
     "<Toolbox>/Xtns/Languages/Python-Fu/knack/ascii knack", "",
     [
-    (PF_DIRNAME, "arg0", u"Repertoire avec les images sources", ""),
+    (PF_DIRNAME, "arg0", u"Repertoire de sortie", ""),
     (PF_STRING, "arg1", "Nom du fichier", u"filename.txt"),
     (PF_INT, "arg3", "nombre de colonne", u"30"),
     (PF_INT, "arg4", "nombre de ligne", u"10"),

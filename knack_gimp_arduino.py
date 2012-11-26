@@ -46,8 +46,8 @@ register(
     "knack_gimp_arduino", "", "", "", "", "",
     "<Toolbox>/Xtns/Languages/Python-Fu/knack/arduino", "",
     [
-    (PF_DIRNAME, "arg0", u"Repertoire avec les images sources", ""),
-    (PF_STRING, "arg1", "Nom du fichier", u"filename.txt"),
+    (PF_DIRNAME, "arg0", u"Repertoire du projet (sketchbook)", ""),
+    (PF_STRING, "arg1", "Nom du projet", u"myproject"),
     ],
     [],
     run,
