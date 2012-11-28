@@ -31,9 +31,14 @@ PROGMEM const unsigned char TVOlogo[] = {%i,%i,%s};' \
     % (width, height, generate_binary_code(pixelList, width, height))
     return code
 
-def convert_hexa(binary):
-    '''convert binary to hex'''
-    return hex(255)
+
+def toDecimal( binaryNumber ):
+    multiplier = 0
+    number = 0
+    for el in binaryNumber[ : : -1 ]:
+        number += int( el ) * ( 2**multiplier )
+        multiplier += 1
+    return number
 
 def generate_binary_code(pixelList, width, height):
     '''convert pixel list to hexadecimal'''
@@ -46,16 +51,21 @@ def generate_binary_code(pixelList, width, height):
             '''pixel==255'''
             binary += '1'
         if len(binary) == 8:
-            hexacode += convert_hexa(binary)
-    return hexacode
-
+            hexacode += hex(toDecimal(binary))
+            hexacode += ','
+            binary = ''
+    if len(binary) != 0:
+        hexacode += hex(toDecimal(binary))
+        hexacode += ','
+    return hexacode[:-1]
+    
 class genArduino(object):
     def __init__(self):
         None
     def generate(self, width, height, pixelList, directory, projectname):
         '''generate cpp file with binary'''
         try:
-            node = open(os.path.join(directory, projectname, 'src', 'bitmaps.cpp'), 'w')
+            node = open(os.path.join(directory, 'bitmaps.cpp'), 'w')
         except IOError as e:
             raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
         else:
