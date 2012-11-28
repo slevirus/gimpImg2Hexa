@@ -30,12 +30,13 @@ from knack.gimp.generator.genArduino import genArduino
 
 def run(*args):
     """main plugin"""
-    input_dir = args
+    input_dir, filename = args
+    file_out = os.path.join(input_dir, filename)
     try:
         control_object = control(genArduino())
         control_object.make_total_selection()
         control_object.check_and_convert_1bit()
-        control_object.generate_bitmap(input_dir)
+        control_object.generate_bitmap(file_out)
     except KnackError as e:
         e.generate_log_popup()
         return False
@@ -45,7 +46,8 @@ register(
     "knack_gimp_arduino", "", "", "", "", "",
     "<Toolbox>/Xtns/Languages/Python-Fu/knack/arduino", "",
     [
-    (PF_DIRNAME, "arg0", u"Repertoire du projet (sketchbook)", ""),
+    (PF_DIRNAME, "arg0", u"Repertoire des sources projets (sketchbook)", ""),
+    (PF_STRING, "arg1", u"Nom du fichier source c++", ""),
     ],
     [],
     run,

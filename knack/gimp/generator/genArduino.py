@@ -35,7 +35,7 @@ def toDecimal( binaryNumber ):
 def toCArray(width, height, pixelList):
     '''generate c array to paste in c/c++ code'''
     code = '#include \"TVOlogo.h\"\n\
-PROGMEM const unsigned char TVOlogo[] = {%i,%i,%s};' \
+PROGMEM const unsigned char TVOlogo[] = {%i,%i,\n%s};' \
     % (width, height, generate_binary_code(pixelList, width, height))
     return code
 
@@ -46,8 +46,10 @@ def generate_binary_code(pixelList, width, height):
     hexacode = str()
     binary = ''
     index_row = 0
+    index_break_line = 0
     for pixel in pixelList:
-        index_row += 1    
+        index_row += 1
+        index_break_line += 1  
         if pixel == 0:
             binary += '0'
         else:
@@ -57,9 +59,11 @@ def generate_binary_code(pixelList, width, height):
             binary = binary.ljust(8, '0')
             index_row = 0
         if len(binary) == 8:
-            
             hexacode += hex(toDecimal(binary))
             hexacode += ','
+            if index_break_line >= width:
+                hexacode += '\n'
+                index_break_line = 0
             binary = ''
     if len(binary) != 0:
         hexacode += hex(toDecimal(binary))
@@ -69,16 +73,14 @@ def generate_binary_code(pixelList, width, height):
 class genArduino(object):
     def __init__(self):
         None
-    def generate(self, width, height, pixelList, file):
+    def generate(self, width, height, pixelList, output_file):
         '''generate cpp file with binary'''
         generate_log_console(file)
         try:
-            generate_log_console(file)
-            node = open(file, 'w')
+            node = open(output_file, 'w')
         except IOError as e:
             raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
         else:
-            generate_log_console(pixelList)
             node.write(toCArray(width, height, pixelList))
         finally:
             node.close()
