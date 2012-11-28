@@ -28,21 +28,26 @@ def toCArray(width, height, pixelList):
     '''generate c array to paste in c/c++ code'''
     code = '#include \"TVOlogo.h\"\n\
 PROGMEM const unsigned char TVOlogo[] = {%i,%i,%s};' \
-    % (width, height, generate_hexacode(pixelList, width, height))
+    % (width, height, generate_binary_code(pixelList, width, height))
     return code
 
-def generate_hexacode(pixelList, width, height):
-    '''convert binary to hexadecimal'''
+def convert_hexa(binary):
+    '''convert binary to hex'''
+    return hex(255)
+
+def generate_binary_code(pixelList, width, height):
+    '''convert pixel list to hexadecimal'''
     hexacode = str()
-    ind = -1
+    binary = str()
     for pixel in pixelList:
-        ind += 1
-        if ind == width:
-            hexacode += '\n'
-            ind = 0
-        hexacode += pixel
-        hexacode += ','
-    return hexacode[:-1]
+        if pixel == 0:
+            binary += '0'
+        else:
+            '''pixel==255'''
+            binary += '1'
+        if len(binary) == 8:
+            hexacode += convert_hexa(binary)
+    return hexacode
 
 class genArduino(object):
     def __init__(self):
