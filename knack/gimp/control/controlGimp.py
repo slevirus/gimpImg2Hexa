@@ -148,4 +148,5 @@ class control(controlColor):
     def generate_bitmap(self, directory):
         '''generate arduino code for generate c++ source file'''
         self.makePixelList()
-        self.generator.generate(self.get_width(), self.get_height(), self.pixelList, directory)
+        ddf= '/home/syruslevirus/labo/test.cpp'
+        self.generator.generate(self.get_width(), self.get_height(), self.pixelList, ddf)

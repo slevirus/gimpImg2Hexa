@@ -24,14 +24,6 @@ from knack.gimp.utils import KnackError, generate_log_console
 from revelation import FileError
 from random import uniform
 
-def toCArray(width, height, pixelList):
-    '''generate c array to paste in c/c++ code'''
-    code = '#include \"TVOlogo.h\"\n\
-PROGMEM const unsigned char TVOlogo[] = {%i,%i,%s};' \
-    % (width, height, generate_binary_code(pixelList, width, height))
-    return code
-
-
 def toDecimal( binaryNumber ):
     multiplier = 0
     number = 0
@@ -40,17 +32,32 @@ def toDecimal( binaryNumber ):
         multiplier += 1
     return number
 
+def toCArray(width, height, pixelList):
+    '''generate c array to paste in c/c++ code'''
+    code = '#include \"TVOlogo.h\"\n\
+PROGMEM const unsigned char TVOlogo[] = {%i,%i,%s};' \
+    % (width, height, generate_binary_code(pixelList, width, height))
+    return code
+
+
+
 def generate_binary_code(pixelList, width, height):
     '''convert pixel list to hexadecimal'''
     hexacode = str()
-    binary = str()
+    binary = ''
+    index_row = 0
     for pixel in pixelList:
+        index_row += 1    
         if pixel == 0:
             binary += '0'
         else:
             '''pixel==255'''
             binary += '1'
+        if index_row >= width:
+            binary = binary.ljust(8, '0')
+            index_row = 0
         if len(binary) == 8:
+            
             hexacode += hex(toDecimal(binary))
             hexacode += ','
             binary = ''
@@ -62,13 +69,16 @@ def generate_binary_code(pixelList, width, height):
 class genArduino(object):
     def __init__(self):
         None
-    def generate(self, width, height, pixelList, directory):
+    def generate(self, width, height, pixelList, file):
         '''generate cpp file with binary'''
+        generate_log_console(file)
         try:
-            node = open(os.path.join(directory, 'bitmaps.cpp'), 'w')
+            generate_log_console(file)
+            node = open(file, 'w')
         except IOError as e:
             raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
         else:
+            generate_log_console(pixelList)
             node.write(toCArray(width, height, pixelList))
         finally:
             node.close()
