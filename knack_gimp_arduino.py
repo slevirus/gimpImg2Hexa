@@ -31,7 +31,6 @@ from knack.gimp.generator.genArduino import genArduino
 def run(*args):
     """main plugin"""
     input_dir, filename = args
-    filePath = os.path.join(input_dir, filename)
     try:
         control_object = control(genArduino())
         control_object.make_total_selection()

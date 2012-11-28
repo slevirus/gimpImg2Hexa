@@ -129,12 +129,12 @@ class controlColor(controlLayer):
             self.list_color.append(10)
         self.select_color = set(self.list_color)
     def makePixelList(self):
+        '''make pixel list left to right and top to bottom'''
         self.pixelList = []
         for y in range(0,self.get_height()):
             for x in range(0,self.get_width()):
                 self.pick_gray(x, y, 0.5)
-                hexa = "0x%02x" % (self.gray)
-                self.pixelList.append(hexa)
+                self.pixelList.append(self.gray)
 
 class control(controlColor):
     def __init__(self, generator):
@@ -146,5 +146,6 @@ class control(controlColor):
         self.make_list_color()
         self.generator.generate(self.list_color, self.select_color, filename)
     def generate_bitmap(self, filename, directory):
+        '''generate arduino code for generate c++ source file'''
         self.makePixelList()
         self.generator.generate(self.get_width(), self.get_height(), self.pixelList, filename, directory)

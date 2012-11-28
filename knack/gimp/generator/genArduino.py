@@ -26,15 +26,18 @@ from random import uniform
 
 def toCArray(width, height, pixelList):
     '''generate c array to paste in c/c++ code'''
-    code = '{%i,%i,%s};' % (width, height, generate_hexacode(pixelList))
+    code = '#include \"TVOlogo.h\"\n\
+PROGMEM const unsigned char TVOlogo[] = {%i,%i,%s};' \
+    % (width, height, generate_hexacode(pixelList, width, height))
     return code
 
-def generate_hexacode(pixelList):
+def generate_hexacode(pixelList, width, height):
+    '''convert binary to hexadecimal'''
     hexacode = str()
-    ind = 0
+    ind = -1
     for pixel in pixelList:
         ind += 1
-        if ind == 10:
+        if ind == width:
             hexacode += '\n'
             ind = 0
         hexacode += pixel
@@ -45,12 +48,9 @@ class genArduino(object):
     def __init__(self):
         None
     def generate(self, width, height, pixelList, directory, projectname):
+        '''generate cpp file with binary'''
         try:
-            path_src = self.generateInoProject(directory, projectname)
-        except KnackError as e:
-            e.generate_log_popup()
-        try:
-            node = open(os.path.join(path_src, 'bitmaps.cpp'), 'w')
+            node = open(os.path.join(directory, projectname, 'src', 'bitmaps.cpp'), 'w')
         except IOError as e:
             raise KnackError("I/O error({0}): {1}".format(e.errno, e.strerror))
         else:
@@ -58,11 +58,3 @@ class genArduino(object):
         finally:
             node.close()
         return True
-    def generateInoProject(self, directory, projectname):
-        os.chdir(directory)
-        os.mkdir(projectname, 0770)
-        os.chdir(os.path.join(directory, projectname))
-        os.mkdir('src', 0770)
-        os.chdir(os.path.join(directory, projectname, 'src'))
-        return os.path.join(directory, projectname, 'src')
-        
