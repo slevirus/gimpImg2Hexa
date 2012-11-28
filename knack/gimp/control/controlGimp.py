@@ -145,7 +145,7 @@ class control(controlColor):
         '''lauch file generator process with ascii generator'''
         self.make_list_color()
         self.generator.generate(self.list_color, self.select_color, filename)
-    def generate_bitmap(self, filename, directory):
+    def generate_bitmap(self, directory):
         '''generate arduino code for generate c++ source file'''
         self.makePixelList()
-        self.generator.generate(self.get_width(), self.get_height(), self.pixelList, filename, directory)
+        self.generator.generate(self.get_width(), self.get_height(), self.pixelList, directory)

@@ -62,7 +62,7 @@ def generate_binary_code(pixelList, width, height):
 class genArduino(object):
     def __init__(self):
         None
-    def generate(self, width, height, pixelList, directory, projectname):
+    def generate(self, width, height, pixelList, directory):
         '''generate cpp file with binary'''
         try:
             node = open(os.path.join(directory, 'bitmaps.cpp'), 'w')
