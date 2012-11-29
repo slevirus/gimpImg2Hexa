@@ -116,8 +116,11 @@ class controlColor(controlLayer):
             return True
     def check_and_convert_1bit(self):
         '''Convert layer color if needed'''
-        #gimp.pdb.gimp_image_convert_indexed(self.image, 0, 3, 0, 0, 0, 0)
-        return True
+        if self.layer.is_indexed == True and self.image.colormap == '\xff\xff\xff\x00\x00\x00':
+            return True
+        else:
+            gimp.pdb.gimp_image_convert_indexed(self.image, 0, 3, 0, 0, 0, 0)
+            return True
     def make_list_color(self):
         '''make list with color'''
         self.list_color = []

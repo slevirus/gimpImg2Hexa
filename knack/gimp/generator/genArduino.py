@@ -61,14 +61,20 @@ def generate_binary_code(pixelList, width, height):
         if len(binary) == 8:
             hexacode += hex(toDecimal(binary))
             hexacode += ','
-            if index_break_line >= width:
+            if index_break_line > width:
                 hexacode += '\n'
                 index_break_line = 0
             binary = ''
     if len(binary) != 0:
         hexacode += hex(toDecimal(binary))
         hexacode += ','
-    return hexacode[:-1]
+    if hexacode[-1:] == '\n':
+        return hexacode[:-2]
+    elif hexacode[-1:] == ',':
+        return hexacode[:-1]
+    else:
+        return hexacode
+        
     
 class genArduino(object):
     def __init__(self):
